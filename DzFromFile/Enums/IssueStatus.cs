@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DzFromFile.Enums
 {
-    public enum TaskStatus
+    public enum IssueStatus
     {
         Assigned,       
         InProgress,     

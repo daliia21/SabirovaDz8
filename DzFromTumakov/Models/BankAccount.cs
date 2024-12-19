@@ -102,7 +102,6 @@ namespace DzFromTumakov.Models
             ShowMessage("Счет успешно пополнен!");
         }
 
-        // спросить у камиля
         public void Transfer(BankAccount otherAccount, decimal amount)
         {
             if (otherAccount == null)
