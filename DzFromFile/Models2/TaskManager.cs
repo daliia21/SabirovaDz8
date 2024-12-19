@@ -8,8 +8,8 @@ namespace DzFromFile.Models2
 {
     class TaskManager
     {
-        public List<Project> Projects { get; set; } // Список проектов
-        public List<TeamMember> Team { get; set; } // Список участников команды
+        public List<Project> Projects;
+        public List<TeamMember> Team;
 
         public TaskManager()
         {

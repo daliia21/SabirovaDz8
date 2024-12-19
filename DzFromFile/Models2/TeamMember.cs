@@ -8,7 +8,7 @@ namespace DzFromFile.Models2
 {
     class TeamMember
     {
-        private string name;
+        public string name;
 
         public TeamMember(string name)
         {

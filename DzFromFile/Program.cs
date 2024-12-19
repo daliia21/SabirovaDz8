@@ -1,5 +1,6 @@
 ﻿using DzFromFile.Models2;
 
+
 namespace DzFromFile
 {
     internal class Program
@@ -15,19 +16,19 @@ namespace DzFromFile
             TaskManager manager = new TaskManager();
 
             // создание команды
-            string [] teamNames = new[] { "Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hannah", "Ian", "Jack" };
+            string [] teamNames = new[] { "Элина", "Иван", "Ангелина", "Людмила", "Рамзия", "Сагида", "Резеда", "Павел", "Ян", "Гульчачак" };
             foreach (string name in teamNames)
             {
                 manager.AddTeamMember(name);
             }
 
             // создание проекта
-            Project project = new Project("Разработка веб-приложения", new DateTime(2024, 12, 31), "Клиент", "Alice");
+            Project project = new Project("Разработка веб-приложения", new DateTime(2024, 12, 31), "Марьям", "Элина");
 
             // добавление задач
             for (int i = 0; i < manager.Team.Count; i++)
             {
-                Models2.Task task = new Models2.Task($"Task {i + 1} description", new DateTime(2024, 12, 20), "Alice", manager.Team[i].Name);
+                Models2.Task task = new Models2.Task($"Task {i + 1} description", new DateTime(2024, 12, 20), "Alice", manager.Team[i].name);
                 project.AddTask(task);
             }
 
@@ -38,8 +39,8 @@ namespace DzFromFile
             foreach (Models2.Task task in project.Tasks)
             {
                 task.TakeInProgress();
-                var report = new Report($"Report for {task.Description}", DateTime.Now, task.Executor);
-                task.SubmitReport(report);
+                var report = new Report($"Report for {task.description}", DateTime.Now, task.executor);
+                task.SendReport(report);
                 task.ApproveReport();
             }
 

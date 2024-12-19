@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DzFromFile.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,17 +8,13 @@ using System.Threading.Tasks;
 namespace DzFromFile.Models2
 {
     class Project
-    {
-        public const string STATUS_PROJECT = "Проект";
-        public const string STATUS_IN_PROGRESS = "Исполнение";
-        public const string STATUS_CLOSED = "Закрыт";
-
+    {    
         private string description;
         private DateTime deadline;
         private string client;
         private string teamLead;
         public List<Task> Tasks;
-        private string Status;
+        private ProjectStatus status;
 
         public Project(string description, DateTime deadline, string client, string teamLead)
         {
@@ -26,12 +23,12 @@ namespace DzFromFile.Models2
             this.client = client;
             this.teamLead = teamLead;
             Tasks = new List<Task>();
-            Status = STATUS_PROJECT;
+            status = ProjectStatus.Project;
         }
 
         public void AddTask(Task task)
         {
-            if (Status == STATUS_PROJECT)
+            if (status == ProjectStatus.Project)
             {
                 Tasks.Add(task);
             }
@@ -43,9 +40,9 @@ namespace DzFromFile.Models2
 
         public void StartExecution()
         {
-            if (Tasks.TrueForAll(task => task.status == Task.STATUS_ASSIGNED))
+            if (Tasks.TrueForAll(task => task.status == Enums.TaskStatus.Assigned))
             {
-                Status = STATUS_IN_PROGRESS;
+                status = ProjectStatus.InProgress;
             }
             else
             {
@@ -55,9 +52,9 @@ namespace DzFromFile.Models2
 
         public void CloseProject()
         {
-            if (Tasks.TrueForAll(task => task.status == Task.STATUS_COMPLETED))
+            if (Tasks.TrueForAll(task => task.status == Enums.TaskStatus.Completed))
             {
-                Status = STATUS_CLOSED;
+                status = ProjectStatus.Closed;
             }
             else
             {
@@ -67,7 +64,7 @@ namespace DzFromFile.Models2
 
         public void ShowStatus()
         {
-            Console.WriteLine($"Project status: {Status}");
+            Console.WriteLine($"Project status: {status}");
         }
     }
 }

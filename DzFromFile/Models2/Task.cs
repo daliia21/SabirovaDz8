@@ -3,66 +3,61 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskStatus = DzFromFile.Enums.TaskStatus;
 
 namespace DzFromFile.Models2
 {
     class Task
     {
-        // Возможные статусы задачи
-        public const string STATUS_ASSIGNED = "Назначена";
-        public const string STATUS_IN_PROGRESS = "В работе";
-        public const string STATUS_UNDER_REVIEW = "На проверке";
-        public const string STATUS_COMPLETED = "Выполнена";
-
-        private string description;
+        public string description;
         private DateTime deadline;
-        private string initiator;
-        private string executor;
-        public string status;
+        private string client;
+        public string executor;
+        public TaskStatus status;
         private Report report;
 
-        public Task(string description, DateTime deadline, string initiator, string executor)
+        public Task(string description, DateTime deadline, string client, string executor)
         {
             this.description = description;
             this.deadline = deadline;
-            this.initiator = initiator;
+            this.client = client;
             this.executor = executor;
-            status = STATUS_ASSIGNED;
+            status = TaskStatus.Assigned;
         }
 
-        // Взять задачу в работу
+        // взятие задачи в работу
         public void TakeInProgress()
         {
-            status = STATUS_IN_PROGRESS;
+            status = TaskStatus.InProgress;
         }
 
-        // Делегировать задачу другому исполнителю
+        // делегирование задачи другому исполнителю
         public void Delegate(string newExecutor)
         {
             executor = newExecutor;
-            status = STATUS_ASSIGNED;
+            status = TaskStatus.Assigned;
         }
 
-        // Отклонить задачу
+        // отклонение задачи
         public void Reject()
         {
             executor = null;
-            status = STATUS_ASSIGNED;
+            status = TaskStatus.Assigned;
         }
 
-        // Отправить отчет по задаче
-        public void SubmitReport(Report report)
+        // отправка отчета по задаче
+        public void SendReport(Report report)
         {
             this.report = report;
-            status = STATUS_UNDER_REVIEW;
+            status = TaskStatus.UnderReview;
         }
 
-        // Утвердить отчет по задаче
+        // утверждение отчета по задаче
         public void ApproveReport()
         {
-            if (status == STATUS_UNDER_REVIEW)
+            if (status == TaskStatus.UnderReview)
             {
-                status = STATUS_COMPLETED;
+                status = TaskStatus.Completed;
             }
         }
     }

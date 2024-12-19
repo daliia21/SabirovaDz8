@@ -8,15 +8,15 @@ namespace DzFromFile.Models2
 {
     class Report
     {
-        public string Text { get; set; } // Текст отчета
-        public DateTime Date { get; set; } // Дата выполнения отчета
-        public string Executor { get; set; } // Исполнитель отчета
+        private string text;
+        private DateTime date;
+        private string executor;
 
         public Report(string text, DateTime date, string executor)
         {
-            Text = text;
-            Date = date;
-            Executor = executor;
+            this.text = text;
+            this.date = date;
+            this.executor = executor;
         }
     }
 
